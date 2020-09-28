@@ -1,0 +1,5 @@
+package gaussianNB
+
+func Init() {
+
+}
