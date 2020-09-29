@@ -17,7 +17,14 @@ func TestArgmax(t *testing.T) {
 	assert.Equal(t, a, output)
 	assert.Equal(t, b, input[output])
 }
+func TestAccuracyScore(t *testing.T) {
+	score, err := AccuracyScore([]int{0, 1, 2, 3, 4}, []int{0, 1, 2, 3, 5})
+	assert.Nil(t, err)
+	assert.Equal(t, score, 0.8)
 
+	_, err = AccuracyScore([]int{0, 1, 2, 3}, []int{0, 1, 2, 3, 5})
+	assert.Error(t, err)
+}
 func TestLogSumExp(t *testing.T) {
 	input := []float64{-1525, -981}
 	output := -981.0

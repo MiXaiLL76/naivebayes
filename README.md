@@ -23,7 +23,7 @@ go get github.com/MiXaiLL76/naivebayes
 |**predict**(X) | Perform classification on an array of test vectors X. | **✓ DONE**|
 |**predict_log_proba**(X)|Return log-probability estimates for the test vector X.|**✓ DONE**|
 |**predict_proba**(X)|Return probability estimates for the test vector X.|**✓ DONE**|
-|**score**(X, y[, sample_weight])|Return the mean accuracy on the given test data and labels.| **W.I.P.** |  
+|**score**(X, y[, sample_weight])|Return the mean accuracy on the given test data and labels.| **✓ DONE** |  
   
 
 ## Utility
@@ -33,3 +33,4 @@ go get github.com/MiXaiLL76/naivebayes
 |**argmax**(array []float64)|Returns the indices of the maximum values| **✓ DONE**|
 |**logsumexp**(array []float64)|Compute the log of the sum of exponentials of input elements.| **✓ DONE**|
 |**getShape**(array [][]float64)|Return the shape of an array.| **✓ DONE**|
+|**AccuracyScore**(y_true, y_pred)|Accuracy classification score.| **✓ DONE**|

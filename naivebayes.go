@@ -154,3 +154,10 @@ func (gnb *GaussianNB) Predict(X [][]float64) (predict []int) {
 	}
 	return
 }
+
+//Score Return the mean accuracy on the given test data and labels.
+func (gnb *GaussianNB) Score(X [][]float64, y []int) (score float64, err error) {
+	pred := gnb.Predict(X)
+	score, err = AccuracyScore(y, pred)
+	return
+}
