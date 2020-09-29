@@ -1,6 +1,12 @@
 package naivebayes
 
-import "math"
+import (
+	"encoding/json"
+	"errors"
+	"fmt"
+	"log"
+	"math"
+)
 
 // GaussianNB class
 type GaussianNB struct {
@@ -10,8 +16,11 @@ type GaussianNB struct {
 	Classes []int       `json:"classes"`
 }
 
-//New Создание нового класса GaussianNB с параметрами
-func New(priors []float64, sigmas [][]float64, thetas [][]float64, classes []int) *GaussianNB {
+//New build new GaussianNB class
+// Returns
+// -------
+// GaussianNB{}
+func New(priors []float64, sigmas [][]float64, thetas [][]float64, classes []int) (gnb *GaussianNB, err error) {
 	if classes == nil {
 		classes = make([]int, len(priors))
 		for i := 0; i < len(classes); i++ {
@@ -19,12 +28,44 @@ func New(priors []float64, sigmas [][]float64, thetas [][]float64, classes []int
 		}
 	}
 
-	return &GaussianNB{
+	if len(priors) != len(classes) {
+		err = errors.New("len(priors) != len(classes)")
+	}
+	n, m := getShape(sigmas)
+	a, b := getShape(thetas)
+	if a != n || b != m {
+		err = fmt.Errorf("sigmas.shape(%d, %d) != thetas.shape(%d, %d)", n, m, a, b)
+	}
+	log.Println()
+	gnb = &GaussianNB{
 		Priors:  priors,
 		Sigmas:  sigmas,
 		Thetas:  thetas,
 		Classes: classes,
 	}
+	return
+}
+
+//GetWeight Get weight for this estimator.
+// Returns
+// -------
+// A: JSON of GaussianNB class
+// B: Error
+func (gnb *GaussianNB) GetWeight() (b []byte, err error) {
+	b, err = json.Marshal(gnb)
+	return
+}
+
+//SetWeight set weight for this estimator.
+// Parameters
+// ----------
+// I : JSON bytes for Unmarshal
+// Returns
+// -------
+// A: Error
+func (gnb *GaussianNB) SetWeight(I []byte) (err error) {
+	err = json.Unmarshal(I, &gnb)
+	return
 }
 
 func (gnb *GaussianNB) jointLoglikelihood(features []float64) []float64 {
