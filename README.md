@@ -14,4 +14,19 @@ The project was implemented as part of a service that works with GaussianNB.
 |**predict**(X) | Perform classification on an array of test vectors X. | **✓ DONE**|
 |**predict_log_proba**(X)|Return log-probability estimates for the test vector X.|**✓ DONE**|
 |**predict_proba**(X)|Return probability estimates for the test vector X.|**✓ DONE**|
-|**score**(X, y[, sample_weight])|Return the mean accuracy on the given test data and labels.| **W.I.P.** |
+|**score**(X, y[, sample_weight])|Return the mean accuracy on the given test data and labels.| **W.I.P.** |  
+  
+  
+  
+## Examples
+
+**TRAIN** in Python [train.ipynb](examples/train.ipynb)  
+**TEST**  in Golang [examples/main.go](examples/main.go)
+
+## Utility
+
+| Method | Description | Status |
+|--------|-------------|--------|
+|**argmax**(array []float64)|Returns the indices of the maximum values| **✓ DONE**|
+|**logsumexp**(array []float64)|Compute the log of the sum of exponentials of input elements.| **✓ DONE**|
+|**getShape**(array [][]float64)|Return the shape of an array.| **✓ DONE**|
