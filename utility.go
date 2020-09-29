@@ -29,3 +29,18 @@ func logsumexp(array []float64) float64 {
 
 	return math.Log(sum) + aMax
 }
+
+func getShape(array [][]float64) (samples int, classes int) {
+	samples = len(array)
+	if samples > 0 {
+		classes = len(array[0])
+		for _, sub := range array {
+			if classes != len(sub) {
+				classes = -1
+				break
+			}
+		}
+
+	}
+	return
+}
