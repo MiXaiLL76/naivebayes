@@ -2,6 +2,15 @@
 Sklearn Naive Bayes interpretation for GO.
 The project was implemented as part of a service that works with GaussianNB.
 
+# Install
+```
+go get github.com/MiXaiLL76/naivebayes
+```
+
+# Example  
+**TRAIN** in Python [train.ipynb](examples/train.ipynb)  
+**TEST**  in Golang [examples/main.go](examples/main.go)  
+
 # Implementing Naive Bayes Classes
 
 ## GaussianNB [sklearn](https://scikit-learn.org/stable/modules/naive_bayes.html#gaussian-naive-bayes)
@@ -16,12 +25,6 @@ The project was implemented as part of a service that works with GaussianNB.
 |**predict_proba**(X)|Return probability estimates for the test vector X.|**✓ DONE**|
 |**score**(X, y[, sample_weight])|Return the mean accuracy on the given test data and labels.| **W.I.P.** |  
   
-  
-  
-## Examples
-
-**TRAIN** in Python [train.ipynb](examples/train.ipynb)  
-**TEST**  in Golang [examples/main.go](examples/main.go)
 
 ## Utility
 
