@@ -8,6 +8,28 @@ import (
 
 // https://github.com/stretchr/testify
 
+func TestVariance(t *testing.T) {
+	input := [][]float64{{1, 2, 3, 4, -10, 1}, {1, 2, 3, 4, -10, 2}}
+
+	output_nil := [][]float64{{3}}
+	assert.Equal(t, output_nil, umrSum(input, nil))
+
+	output0 := [][]float64{{2, 4, 6, 8, -20, 3}}
+	assert.Equal(t, output0, umrSum(input, 0))
+
+	output1 := [][]float64{{1, 2}}
+	assert.Equal(t, output1, umrSum(input, 1))
+
+	output2 := [][]float64{{21.805555555555557, 22.222222222222225}}
+	assert.Equal(t, output2, variance(input, 1))
+
+	output3 := [][]float64{{0, 0, 0, 0, 0, 0.25}}
+	assert.Equal(t, output3, variance(input, 0))
+
+	output4 := [][]float64{{22.020833333333332}}
+	assert.Equal(t, output4, variance(input, nil))
+}
+
 func TestArgmax(t *testing.T) {
 	input := []float64{1, 2, 3, 4, 5, 10, 5, 4, 3, 2, 1}
 	output := 5

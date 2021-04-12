@@ -1,18 +1,9 @@
 package naivebayes
 
-import "math"
-
-// https://pyprog.pro/sort/argmax.html
-func argmax(array []float64) (argmax int, maximum float64) {
-	argmax = -1
-	maximum = math.Inf(-1)
-	for i, value := range array {
-		if maximum < value {
-			argmax, maximum = i, value
-		}
-	}
-	return
-}
+import (
+	"math"
+	"reflect"
+)
 
 // https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.logsumexp.html
 func logsumexp(array []float64) float64 {
@@ -30,17 +21,47 @@ func logsumexp(array []float64) float64 {
 	return math.Log(sum) + aMax
 }
 
-func getShape(array [][]float64) (samples int, classes int) {
-	samples = len(array)
-	if samples > 0 {
-		classes = len(array[0])
-		for _, sub := range array {
-			if classes != len(sub) {
-				classes = -1
-				break
+func in_array(val interface{}, array interface{}) (exists bool, index int) {
+	exists = false
+	index = -1
+
+	switch reflect.TypeOf(array).Kind() {
+	case reflect.Slice:
+		s := reflect.ValueOf(array)
+
+		for i := 0; i < s.Len(); i++ {
+			if reflect.DeepEqual(val, s.Index(i).Interface()) == true {
+				index = i
+				exists = true
+				return
 			}
 		}
+	}
 
+	return
+}
+
+func all_in_array(val interface{}, array interface{}) (exists bool, indexes []int) {
+	exists = false
+
+	switch reflect.TypeOf(array).Kind() {
+	case reflect.Slice:
+		s := reflect.ValueOf(array)
+
+		for i := 0; i < s.Len(); i++ {
+			if reflect.DeepEqual(val, s.Index(i).Interface()) == true {
+				indexes = append(indexes, i)
+				exists = true
+			}
+		}
+	}
+
+	return
+}
+
+func int_as_float(val []int) (out []float64) {
+	for _, v := range val {
+		out = append(out, float64(v))
 	}
 	return
 }
